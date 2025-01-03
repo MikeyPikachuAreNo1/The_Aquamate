@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Page</title>
+    <style>
+        /* Full screen background for the loading page */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f8ff;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Container for the loading content */
+        .loading-container {
+            text-align: center;
+            width: 80%;
+            max-width: 500px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Progress bar container */
+        .progress-bar-container {
+            width: 100%;
+            background-color: #f3f3f3;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        /* Progress bar itself */
+        .progress-bar {
+            height: 20px;
+            width: 0;
+            background-color: #3498db;
+            border-radius: 8px;
+            transition: width 0.5s ease;
+        }
+
+        /* Text for percentage */
+        .percentage-text {
+            font-size: 18px;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        /* Skip button styles */
+        .skip-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .skip-button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Loading circular spinner styles */
+        .spinner-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .spinner {
+            border: 5px solid #f3f3f3; /* Light grey */
+            border-top: 5px solid #3498db; /* Blue color for spinner */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Keyframes for the circular spinner animation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loading page container -->
+    <div class="loading-container">
+        <!-- Progress bar container -->
+        <div class="progress-bar-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+        <div id="percentage" class="percentage-text">0%</div>
+
+        <!-- Skip button -->
+        <button class="skip-button" onclick="skipLoading()">Skip</button>
+
+        <!-- Circular loading spinner -->
+        <div class="spinner-container">
+            <div id="spinner" class="spinner"></div>
+        </div>
+    </div>
+
+    <script>
+        // Simulate loading process with progress bar
+        let progress = 0;
+        const progressBar = document.getElementById('progress-bar');
+        const percentageText = document.getElementById('percentage');
+        const spinner = document.getElementById('spinner');
+
+        function updateProgress() {
+            if (progress < 100) {
+                progress++;
+                progressBar.style.width = progress + '%';
+                percentageText.textContent = progress + '%';
+            } else {
+                // When loading is complete, redirect to the "page-3a.html"
+                setTimeout(() => {
+                    window.location.href = 'page-3a.html'; // Redirect to page-3a.html
+                }, 500);
+            }
+        }
+
+        // Update progress every 50ms
+        const loadingInterval = setInterval(updateProgress, 50);
+
+        // Function to skip the loading process
+        function skipLoading() {
+            clearInterval(loadingInterval);
+            window.location.href = 'page-3a.html'; // Redirect immediately to page-3a.html
+        }
+    </script>
+
+</body>
+</html>
+
+
+
+
